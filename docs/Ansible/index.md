@@ -6,3 +6,7 @@ I started with ansible a few years ago but it got very complicated with two hous
 Recently, we sold our summer home which greatly simplefies the location of the various computers.
 
 Also, I decided to set up a container system to keep things available and fault tolerant.
+
+## Projects
+
+[Auto Update](auto-update.md)

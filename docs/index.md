@@ -2,10 +2,15 @@
 
 [Augmented Living](Augmented_Living/)
 
-[Kubernetes (K3S)](Kubernetes/)
+[Development](Development/)
 
 [Documentation System](Documentation/)
+
+[Kubernetes (K3S)](Kubernetes/)
 
 [Docker](Docker/)
 
 [Ansible](Ansible/)
+
+[Projects](Projects)
+

@@ -39,3 +39,23 @@ cube06  ansible_connection=ssh  var_hostname=cube06
 control
 workers
 ```
+
+# Master 1
+
+In our case: pi-12-pp
+
+This is our primary node, one of 3 control nodes.
+
+We are going to install the K3s version.
+Use the following command to download and initialize K3s’ master node.
+We pasted the --server into the command to tell it that we will be adding additional master nodes:
+
+If k3s has been installed:
+``` bash
+sudo k3s-killall.sh
+sudo k3s-
+```
+
+``` bash
+curl -sfL https://get.k3s.io | K3S_TOKEN="some_random_password" sh -s - server --cluster-init --disable servicelb
+```
