@@ -1,5 +1,5 @@
 ---
-site_name: Augmented Living using Kubernetes
+site_name: Brian's Documentation
 site_url: http://localhost:8002
 site_author: D. Brian Kimmel
 dev_addr: 127.0.0.1:8002
@@ -22,6 +22,12 @@ nav:
     - Home: index.md
     - License: license.md
     - About: about.md
+    - Development: Development/
+    - Documentation: Documentation/
+    - Ansible: Ansible/
+    - Kubernetes: Kubernetes/
+    - Docker: Docker/
+    - Augmented_Living: Augmented_Living/
 
 markdown_extensions:
     - attr_list

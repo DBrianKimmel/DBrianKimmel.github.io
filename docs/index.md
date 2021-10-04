@@ -1,14 +1,11 @@
-# Welcome to My Site
+# Welcome to My Documentation Site
 
-What the heck is augmented living?
+[Augmented Living](Augmented_Living/)
 
-See [Here](AugmentedLiving.md) for the answer.
+[Kubernetes (K3S)](Kubernetes/)
 
-[Kubernetes](Kubernetes)
+[Documentation System](Documentation/)
 
-[Documentation System](Documentation/){}
+[Docker](Docker/)
 
-[Docker](Docker/index.md)
-
-[Ansible](Ansible)
-
+[Ansible](Ansible/)
