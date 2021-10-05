@@ -22,12 +22,12 @@ nav:
     - Home: index.md
     - License: license.md
     - About: about.md
-    - Development: Development/
-    - Documentation: Documentation/
-    - Ansible: Ansible/
-    - Kubernetes: Kubernetes/
-    - Docker: Docker/
-    - Augmented_Living: Augmented_Living/
+    - Development: Development/index.md
+    - Documentation: Documentation/index.md
+    - Ansible: Ansible/index.md
+    - Kubernetes: Kubernetes/index.md
+    - Docker: Docker/index.md
+    - Augmented_Living: Augmented_Living/index.md
 
 markdown_extensions:
     - attr_list
