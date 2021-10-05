@@ -1,4 +1,5 @@
-name: ci 
+# Build pages using MkDocs on a push to the documentation repository
+name: ci
 on:
   push:
     branches: 

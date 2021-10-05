@@ -336,6 +336,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-rolelabels" class="md-nav__link">
+    Setting role/labels
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -348,6 +363,46 @@
                 
                 
                 <h1 id="first-worker-node">First Worker Node</h1>
+<p>We need to join some workers now; in our case pi-15-pp and pi-16-pp.</p>
+<p>On every worker node do the following:</p>
+<pre><code class="language-bash">curl -sfL https://get.k3s.io | \
+    K3S_URL=&quot;https://172.16.2.12:6443&quot; \
+    K3S_TOKEN=&quot;some_random_password&quot; sh -
+</code></pre>
+<p>You can do that with ansible as well:</p>
+<pre><code class="language-bash">ansible workers -b -m shell -a &quot;curl -sfL https://get.k3s.io | \
+    K3S_URL=&quot;https://172.16.2.12:6443&quot; \
+    K3S_TOKEN=&quot;some_random_password&quot; sh -&quot;
+</code></pre>
+<h2 id="setting-rolelabels">Setting role/labels</h2>
+<p>We can tag our cluster nodes to give them labels.</p>
+<p>Important</p>
+<p>k3s by default allow pods to run on the control plane, which can be OK, but in production it would not. However, in our case, we want to use disks on control nodes for storage, and that does require pods to run on them from Longhorn. So, I'll be using labels to tell pods/deployment where to run.</p>
+<p>Lets add this tag key:value: kubernetes.io/role=worker to worker nodes. This is more cosmetic, to have nice output from kubectl get nodes.</p>
+<pre><code class="language-bash">kubectl label nodes pi-15-pp kubernetes.io/role=worker
+kubectl label nodes pi-16-pp kubernetes.io/role=worker
+</code></pre>
+<p>Another label/tag. I will use this one to tell deployments to prefer nodes where node-type equals workers. The node-type is our chosen name for key, you can call it whatever.</p>
+<pre><code class="language-bash">kubectl label nodes pi-15-pp node-type=worker
+kubectl label nodes pi-16-pp node-type=worker
+</code></pre>
+<p>Whole Kubernetes cluster:</p>
+<pre><code class="language-bash">kubectl get nodes
+NAME        STATUS   ROLES         AGE    VERSION
+pi-12-pp    Ready    etcd,master   5d3h   v1.19.4+k3s1
+pi-17-pp    Ready    etcd,master   5d3h   v1.19.4+k3s1
+pi-18-pp    Ready    etcd,master   5d3h   v1.19.4+k3s1
+pi-15-pp    Ready    worker        5d3h   v1.19.4+k3s1
+pi-16-pp    Ready    worker        5d3h   v1.19.4+k3s1
+</code></pre>
+<p>You can also use kubectl get nodes --show-labels to show all labels for nodes.</p>
+<p>Lastly, add following into /etc/environment (this is so the Helm and other programs know where the Kubernetes config is.)</p>
+<p>On every node:</p>
+<pre><code class="language-bash">echo &quot;KUBECONFIG=/etc/rancher/k3s/k3s.yaml&quot; &gt;&gt; /etc/environment
+</code></pre>
+<p>Or use Ansible:</p>
+<pre><code class="language-bash">ansible cube -b -m lineinfile -a &quot;path='/etc/environment' line='KUBECONFIG=/etc/rancher/k3s/k3s.yaml'&quot;
+</code></pre>
                 
               
               

@@ -1,0 +1,496 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="D. Brian Kimmel">
+      
+      
+        <link rel="canonical" href="http://localhost:8002/Kubernetes/Features/Longhorn/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.1">
+    
+    
+      
+        <title>Longhorn - Brian's Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1c75ef36.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#02a6f2">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="light-blue" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#longhorn" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Brian&#39;s Documentation" class="md-header__button md-logo" aria-label="Brian's Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Brian's Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Longhorn
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Brian&#39;s Documentation" class="md-nav__button md-logo" aria-label="Brian's Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Brian's Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../license/" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Development/" class="md-nav__link">
+        Development
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Documentation/" class="md-nav__link">
+        Documentation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Ansible/" class="md-nav__link">
+        Ansible
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Kubernetes
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Augmented_Living/" class="md-nav__link">
+        Augmented_Living
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#identifying-disks-for-storage" class="md-nav__link">
+    Identifying disks for storage
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="longhorn">Longhorn</h1>
+<p>There is an issue with Raspberry Pi / Ubuntu: the names for disks are assigned almost at random.
+ Therefore, even if you have USB disks in the same slots on multiple nodes, they can be named at random, /dev/sda or /dev/sdb, and there is no easy way to enforce the naming, without messing with udev rules a lot.</p>
+<h2 id="identifying-disks-for-storage">Identifying disks for storage</h2>
+<p>We are going to use Ansible again a lot, and will add new variables with disk names that will be used for storage into /etc/ansible/hosts.</p>
+<p>We are going to use the lsblk -f command on every node and look for disk labels:</p>
+<pre><code class="language-bash">ansible cube -b -m shell -a &quot;lsblk -f&quot;
+</code></pre>
+<p>Results:</p>
+<pre><code class="language-bash">pi-12-pp | CHANGED | rc=0 &gt;&gt;
+NAME                      FSTYPE      LABEL        UUID                                   FSAVAIL FSUSE% MOUNTPOINT
+sda                                                                                                      
+├─sda1                    vfat                     302E-C0DF                                             
+├─sda2                    ext4        ssd-04-arm32 9006c7c6-4791-43f1-bc65-5262c472f64b                  
+├─sda3                    ext4        ssd-04-arm64 ad3c04f1-4cea-4118-bb71-cd937960c9a9      3.8G    71% /
+└─sda4                    LVM2_member              WYao6H-RtuF-J6e3-D1VE-UENC-vWZc-tNx0js                
+  └─vg--ctl--01-lv--store ext4                     1e3438fb-1ce4-4c3b-a709-b397708fdc06     18.5G     0% /var/storage
+mmcblk0                                                                                                  
+├─mmcblk0p1               vfat        system-boot  4D3B-86C0                               135.9M    46% /boot/firmware
+└─mmcblk0p2               ext4        writable     79af43d1-801b-4c28-81d5-724c930bcc83       11G    19% /SD
+
+pi-17-pp | CHANGED | rc=0 &gt;&gt;
+NAME                     FSTYPE      LABEL        UUID                                   FSAVAIL FSUSE% MOUNTPOINT
+sda                                                                                                     
+├─sda1                   vfat                     49CF-1F5A                                             
+├─sda2                   ext4        ssd-07-arm32 461215ce-ea53-4996-8697-54420e7a1da3                  
+├─sda3                   ext4        ssd-07-arm64 b0ac490f-5f83-4ed1-9b94-8a52436b955f     10.3G    29% /
+└─sda4                   LVM2_member              fppIPT-cI0k-Ki17-3ajV-j40Z-toBg-ICwV69                
+  └─vg--ctl--02-lv_store ext4                     fd92218f-9c8a-4e9c-bb06-8d3704bd9b0a     18.5G     0% /var/storage
+mmcblk0                                                                                                 
+├─mmcblk0p1              vfat        system-boot  4D3B-86C0                               132.8M    47% /boot/firmware
+└─mmcblk0p2              ext4        writable     79af43d1-801b-4c28-81d5-724c930bcc83       10G    26% /SD
+
+pi-15-pp | CHANGED | rc=0 &gt;&gt;
+NAME                    FSTYPE      LABEL        UUID                                   FSAVAIL FSUSE% MOUNTPOINT
+sda                                                                                                    
+├─sda1                  exfat                    7C8B-3E4C                                             
+├─sda2                  ext4        ssd-05-arm32 f0ac0c45-7ab2-4f11-8373-7a2f568a3bc2                  
+├─sda3                  ext4        ssd-05-arm64 91f02013-d751-4182-8bcb-5bf6f54498b7     10.4G    28% /
+└─sda4                  LVM2_member              4pM34i-8p3I-6BNB-LgX3-rc0Q-ICh1-tz5Mzs                
+  └─vg_wrk--01-lv_store ext4                     69a82734-94e5-4c03-b5d0-99aa5cfcc794     18.5G     0% /var/storage
+mmcblk0                                                                                                
+├─mmcblk0p1             vfat        system-boot  4D3B-86C0                               132.8M    47% /boot/firmware
+└─mmcblk0p2             ext4        writable     79af43d1-801b-4c28-81d5-724c930bcc83       23G    16% /SD
+
+pi-16-pp | CHANGED | rc=0 &gt;&gt;
+NAME                    FSTYPE      LABEL        UUID                                   FSAVAIL FSUSE% MOUNTPOINT
+sda                                                                                                    
+├─sda1                  exfat                    18D0-56F4                                             
+├─sda2                  ext4        ssd-06-arm32 352ed1b1-4a1e-4cc5-b0e3-c9c3cb34215d                  
+├─sda3                  ext4        ssd-06-arm64 33ad9dc7-82c8-4f49-9521-b0590044d68c     10.6G    27% /
+└─sda4                  LVM2_member              X7LxNz-0G1w-ZAAi-uiXQ-WwWK-ZEvR-r6R16z                
+  └─vg--wrk--02-lv_stor ext4                     23ab704c-0fb8-4d38-824c-8168ca1d8602     18.5G     0% /var/storage
+mmcblk0                                                                                                
+├─mmcblk0p1             vfat        system-boot  4D3B-86C0                               132.8M    47% /boot/firmware
+└─mmcblk0p2             ext4        writable     79af43d1-801b-4c28-81d5-724c930bcc83     10.9G    19% /SD
+
+pi-18-pp | CHANGED | rc=0 &gt;&gt;
+NAME                  FSTYPE      LABEL        UUID                                   FSAVAIL FSUSE% MOUNTPOINT
+sda                                                                                                  
+├─sda1                                                                                               
+├─sda2                ext4        ssd-08-arm32 b7a16d06-0811-43d3-9326-e1b0f0a00b61                  
+├─sda3                ext4        ssd-08-arm64 e8ab8e92-a75b-4905-8660-d7a88075514d     11.4G    22% /
+└─sda4                LVM2_member              UJzcYL-4740-IGbL-szaG-T7xh-WA0C-I3cgA6                
+  └─vg_ctl_03-lv_stor ext4                     04383936-778a-4b6c-bb8c-850ebfe042a4     18.5G     0% /var/storage
+mmcblk0                                                                                              
+├─mmcblk0p1           vfat        system-boot  4D3B-86C0                               132.8M    47% /boot/firmware
+└─mmcblk0p2           ext4        writable     79af43d1-801b-4c28-81d5-724c930bcc83     10.6G    22% /SD
+</code></pre>
+<p>Edit /etc/ansible/hosts, and add a new variable (I have chosen name var_disk) with the disk to wipe.
+TAKE YOUR TIME AND LOOK TWICE ! the wipefs command we’re gonna use will not wipe your OS disk but it might wipe any other that is not mounted.</p>
+<p>[control]
+control01  ansible_connection=local var_hostname=control01 var_disk=sda
+control02  ansible_connection=ssh   var_hostname=control02 var_disk=sdb
+control03  ansible_connection=ssh   var_hostname=control03 var_disk=sdb</p>
+<p>[workers]
+cube01  ansible_connection=ssh  var_hostname=cube01 var_disk=sdb
+cube02  ansible_connection=ssh  var_hostname=cube02 var_disk=sdb
+cube03  ansible_connection=ssh  var_hostname=cube03 var_disk=sdb
+cube04  ansible_connection=ssh  var_hostname=cube04 var_disk=sdb
+cube05  ansible_connection=ssh  var_hostname=cube05 var_disk=sdb
+cube06  ansible_connection=ssh  var_hostname=cube06 var_disk=sda</p>
+<p>[cube:children]
+control
+workers</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.e99e714c.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c7d1b464.min.js"></script>
+      
+        <script src="../../../javascripts/extra.js"></script>
+      
+    
+  </body>
+</html>

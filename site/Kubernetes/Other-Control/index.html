@@ -348,6 +348,26 @@
                 
                 
                 <h1 id="additional-control-nodes">Additional Control Nodes</h1>
+<p>By using the following command on both nodes, we will add these to the cluster as master nodes containing the etcd database:</p>
+<pre><code class="language-bash">curl -sfL https://get.k3s.io | \
+    K3S_TOKEN=&quot;some_random_password&quot; \
+    K3S_KUBECONFIG_MODE=&quot;644&quot; \
+    sh -s - server --server https://172.16.2.12:6443 --no-deploy servicelb
+</code></pre>
+<p>You can do that with Ansible as well:</p>
+<pre><code class="language-bash">ansible pi-17-pp,pi-18-pp -b -m shell -a &quot;curl -sfL https://get.k3s.io | \
+    K3S_TOKEN=&quot;some_random_password&quot; \
+    K3S_KUBECONFIG_MODE=&quot;644&quot; \
+    sh -s - server --server https://172.16.2.12:6443 --no-deploy servicelb&quot;
+</code></pre>
+<p>For the --server parameter, we are using the IP of our primary master node. This will create a control plane for our cluster.</p>
+<p>The control plane should be like this:</p>
+<pre><code class="language-bash">root@control01:/home/ubuntu# kubectl get nodes
+NAME        STATUS   ROLES         AGE    VERSION
+control01   Ready    etcd,master   5d3h   v1.19.4+k3s1
+control02   Ready    etcd,master   5d3h   v1.19.4+k3s1
+control03   Ready    etcd,master   5d3h   v1.19.4+k3s1
+</code></pre>
                 
               
               
